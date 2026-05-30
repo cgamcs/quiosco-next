@@ -6,6 +6,7 @@ interface Store {
   order: OrderItem[]
   addToOrder: (product: Product) => void
   increaseQunatity: (id: Product['id']) => void
+  decreaseQunatity: (id: Product['id']) => void
 }
 
 export const useStore = create<Store>((set, get) => ({
@@ -13,16 +14,16 @@ export const useStore = create<Store>((set, get) => ({
   addToOrder: (product) => {
     // Strip fields not needed in the order item; keep only id, name, price, etc.
     const {categoryId, image, ...data} = product
-    let items : OrderItem[] = []
+    let order : OrderItem[] = []
 
     if (get().order.find(item => item.id === data.id)) {
-      items = get().order.map(item => item.id === data.id ? {
+      order = get().order.map(item => item.id === data.id ? {
         ...item,
         quantity: item.quantity + 1,
         subtotal: item.price * (item.quantity + 1)
       } : item)
     } else {
-      items = [...get().order, {
+      order = [...get().order, {
         ...data,
         quantity: 1,
         subtotal: 1 * product.price
@@ -30,7 +31,7 @@ export const useStore = create<Store>((set, get) => ({
     }
 
     set(() => ({
-      order: items
+      order
     }))
   },
   increaseQunatity: (id) => {
@@ -40,6 +41,17 @@ export const useStore = create<Store>((set, get) => ({
         quantity: item.quantity + 1,
         subtotal: item.price * (item.quantity + 1)
       } : item)
+    }))
+  },
+  decreaseQunatity: (id) => {
+    const order = get().order.map(item => item.id === id ? {
+      ...item,
+      quantity: item.quantity - 1,
+      subtotal: item.price * (item.quantity - 1)
+    } : item)
+
+    set(() => ({
+      order
     }))
   }
 }))

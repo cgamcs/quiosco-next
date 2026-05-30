@@ -4,6 +4,7 @@ import { formatCurrency } from "@/src/utils/intex"
 import { PlusIcon } from "@heroicons/react/24/outline"
 import { MinusIcon } from "@heroicons/react/24/outline"
 import { XCircleIcon } from "@heroicons/react/24/outline"
+import { useMemo } from "react"
 
 type ProductDetailsProps = {
   item: OrderItem
@@ -11,6 +12,8 @@ type ProductDetailsProps = {
 
 export default function ProductDetails({item}: ProductDetailsProps) {
   const increaseQunatity = useStore((state) => state.increaseQunatity)
+  const decreaseQunatity = useStore((state) => state.decreaseQunatity)
+  const disableDecreaseButton = useMemo(() => item.quantity === 1, [item])
 
   return (
     <div className="shadow space-y-1 p-4 bg-white  border-t border-gray-200 ">
@@ -31,7 +34,9 @@ export default function ProductDetails({item}: ProductDetailsProps) {
         <div className="flex gap-5 px-10 py-2 bg-gray-100 w-fit rounded-lg">
             <button
               type="button"
-              onClick={() => {}}
+              onClick={() => decreaseQunatity(item.id)}
+              disabled={disableDecreaseButton}
+              className="disabled:opacity-20"
             >
                 <MinusIcon className="h-6 w-6"/>
             </button>
