@@ -7,7 +7,6 @@ async function getCategories() {
 
 export default async function OrderSidebar() {
   const cateogries = await getCategories()
-  console.log(cateogries)
 
   return (
     <aside className="md:w-72 md:h-screen bg-white">
