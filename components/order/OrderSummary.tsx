@@ -10,6 +10,7 @@ import { OrderSchame } from "@/src/schema"
 
 export default function OrderSummary() {
   const order = useStore((state) => state.order)
+  const clearOrder = useStore((state) => state.clearOrder)
   const total = useMemo(() => order.reduce((total, item) => total + (item.quantity * item.price), 0), [order])
 
   const handleCreateOrder = async (formData: FormData) => {
@@ -36,6 +37,9 @@ export default function OrderSummary() {
         toast.error(issue.message)
       })
     }
+
+    toast.success('Pedido realizado correctamente')
+    clearOrder()
   }
 
   return (
@@ -68,7 +72,7 @@ export default function OrderSummary() {
             />
             <input
               type="submit"
-              className="py-2 rounded uppercase text-white bg-black w-full text-center cursor-pointer font-bold"
+              className="py-2 rounded uppercase text-white bg-black w-full text-center cursor-pointer font-bold active:scale-[.97] transition-transform 15s"
               value="Confirmar pedido"
             />
           </form>
