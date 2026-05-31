@@ -5,13 +5,21 @@ import ProductDetails from "./ProductDetails"
 import { useMemo } from "react"
 import { formatCurrency } from "@/src/utils/intex"
 import { createOrder } from "@/actions/create-order-action"
+import { OrderSchame } from "@/src/schema"
 
 export default function OrderSummary() {
   const order = useStore((state) => state.order)
   const total = useMemo(() => order.reduce((total, item) => total + (item.quantity * item.price), 0), [order])
 
   const handleCreateOrder = (formData: FormData) => {
-    console.log(formData.get('name'))
+    const data = {
+      name: formData.get('name')
+    }
+
+    const result = OrderSchame.safeParse(data)
+
+    console.log(result)
+
     createOrder()
   }
 
