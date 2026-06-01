@@ -1,10 +1,11 @@
 import Heading from "@/components/ui/Heading";
 
-export default function OrdersPage() {
+export default function ProductsPage() {
+
   return (
     <>
       <Heading>
-        Administrar Ordenes
+        Administrar Productos
       </Heading>
     </>
   )
