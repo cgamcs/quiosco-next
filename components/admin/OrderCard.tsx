@@ -1,6 +1,6 @@
 import { completeOrder } from "@/actions/complete-order-action"
 import { OrderWithProducts } from "@/src/types"
-import { formatCurrency } from "@/src/utils/intex"
+import { formatCurrency } from "@/src/utils"
 
 type OrderCardProps = {
   order: OrderWithProducts

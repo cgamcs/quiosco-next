@@ -1,5 +1,5 @@
 import { ProductsWithCategory } from "@/app/admin/products/page"
-import { formatCurrency } from "@/src/utils/intex"
+import { formatCurrency } from "@/src/utils"
 import Link from "next/link"
 
 type ProductTableProps = {

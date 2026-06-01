@@ -1,6 +1,6 @@
 import { useStore } from "@/src/store"
 import { OrderItem } from "@/src/types"
-import { formatCurrency } from "@/src/utils/intex"
+import { formatCurrency } from "@/src/utils"
 import { PlusIcon } from "@heroicons/react/24/outline"
 import { MinusIcon } from "@heroicons/react/24/outline"
 import { XCircleIcon } from "@heroicons/react/24/outline"

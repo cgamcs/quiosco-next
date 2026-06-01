@@ -4,7 +4,7 @@ import { useStore } from "@/src/store"
 import { useMemo } from "react"
 import { toast } from "react-toastify"
 import ProductDetails from "./ProductDetails"
-import { formatCurrency } from "@/src/utils/intex"
+import { formatCurrency } from "@/src/utils"
 import { createOrder } from "@/actions/create-order-action"
 import { OrderSchame } from "@/src/schema"
 
