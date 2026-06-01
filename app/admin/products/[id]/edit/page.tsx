@@ -25,6 +25,11 @@ export default async function EditProductsPage({params}: {params: { id: string }
     <>
       <Heading>Editar Producto</Heading>
 
+      <Link
+        href={'/admin/products'}
+        className="bg-amber-400 w-full lg:w-auto text-xl px-8 py-2.5 text-center font-bold cursor-pointer"
+      >Regresar</Link>
+
       <EditProductForm>
         <ProductForm product={product} />
       </EditProductForm>
