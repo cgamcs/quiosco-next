@@ -15,3 +15,7 @@ export const OrderSchame = z.object({
 export const OrderIdSchema = z.object({
   orderId: z.string().transform((value) => parseInt(value)).refine(value => value > 0, {message: 'Hay errores en el ID de la orden'})
 })
+
+export const SearchSchema = z.object({
+  search: z.string().trim().min(1, {message: 'La búsqueda no puede ir vacía'})
+})
