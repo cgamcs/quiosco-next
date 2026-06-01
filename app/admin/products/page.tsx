@@ -1,6 +1,11 @@
+import Pagination from "@/components/products/Pagination"
 import ProductTable from "@/components/products/ProductTable"
 import Heading from "@/components/ui/Heading"
 import { prisma } from "@/src/lib/prisma"
+
+async function productCount() {
+  return await prisma.product.count()
+}
 
 async function getProducts(page: number, pageSize: number) {
   const skip = (page - 1) * pageSize
@@ -22,7 +27,10 @@ export default async function ProductsPage({searchParams} : {searchParams: { pag
   const page = +searchParams.page || 1
   const pageSize = 10
 
-  const prodcuts = await getProducts(page, pageSize)
+  const prodcutsData = getProducts(page, pageSize)
+  const totalProductsData = productCount()
+  const [ prodcuts, totalProducts ] = await Promise.all([prodcutsData, totalProductsData])
+  const totalPages = Math.ceil(totalProducts / pageSize)
 
   return (
     <>
@@ -32,6 +40,11 @@ export default async function ProductsPage({searchParams} : {searchParams: { pag
 
       <ProductTable
         products={prodcuts}
+      />
+
+      <Pagination
+        page={page}
+        totalPages={totalPages}
       />
     </>
   )
